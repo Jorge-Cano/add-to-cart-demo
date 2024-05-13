@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Instrument Store</title>
+    <style>
+        html {
+            text-align: center;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .product {
+            border: 1px solid #ccc;
+            display: inline-block;
+            margin: 10px;
+            padding: 10px;
+            width: 220px;
+            /* Adjusted width for better layout */
+            text-align: center;
+            border-radius: 20px;
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+            /* Set height to maintain aspect ratio */
+        }
+
+        #cart {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #cart-items {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        #cart-items li {
+            text-align: center;
+        }
+
+        #dashboard-container {
+            display: none;
+            /* Initially hide the dashboard */
+            margin-top: 20px;
+            /* Added margin for spacing */
+        }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="https://static.keen.io/assets/keen-fonts.css" />
+    <script crossorigin
+        src="https://cdn.jsdelivr.net/npm/@keen.io/dashboard-creator@latest/dist/public-dashboard/runtime.min.js"></script>
+    <script crossorigin
+        src="https://cdn.jsdelivr.net/npm/@keen.io/dashboard-creator@latest/dist/public-dashboard/vendors.min.js"></script>
+    <script crossorigin
+        src="https://cdn.jsdelivr.net/npm/@keen.io/dashboard-creator@latest/dist/public-dashboard/main.min.js"></script>
+
+</head>
+
+<body>
+    <h1>Simple Instrument Store</h1>
+    <div id="products">
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1568193755668-aae18714a9f1?" alt="Guitar">
+            <h2>Guitar</h2>
+            <button class="add-to-cart" data-product="Guitar">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img 
+src="https://images.unsplash.com/photo-1523297554394-dc159677ffe1?q=80&w=2083&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Synth">
+            <h2>Synth</h2>
+            <button class="add-to-cart" data-product="Synth">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img 
+src="https://images.unsplash.com/photo-1543443258-92b04ad5ec6b?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Drums">
+            <h2>Drums</h2>
+            <button class="add-to-cart" data-product="Drums">Add to Cart</button>
+        </div>
+    </div>
+    <div id="cart">
+        <h2>Shopping Cart 🛒</h2>
+        <ul id="cart-items"></ul>
+    </div>
+
+    <button id="toggle-dashboard">Build Reporting Dashboard</button> <!-- Button to toggle dashboard -->
+
+    <div id="dashboard-container">
+        <!-- Embedded Visualization Script -->
+        <div id="root"></div>
+        <div id="modal-root"></div>
+        <script type="text/javascript">
+            new KeenPublicDashboard({
+                container: '#root',
+                modalContainer: '#modal-root',
+                dashboardId: 'f5619f61-1804-4a19-bc7b-b504039f780d',
+                defaultTimezoneForQuery: "Etc/UTC",
+                disableTimezoneSelection: false,
+                widgetsConfiguration: {
+                    datePicker: {
+                        defaultTimezone: 'Etc/UTC',
+                        disableTimezoneSelection: false
+                    }
+                },
+                backend: {
+                    analyticsApiUrl: 'api.keen.io',
+                    dashboardsApiUrl: 'https://dashboard-service.k-n.io',
+                },
+                project: {
+                    id: '66405624ee261c601ba44347',
+                    accessKey: '2E1CFCFD3593DC99E5C56832FC9815444D6C469B38B80545FC2990B8EE593148',
+                    masterKey: '2E1CFCFD3593DC99E5C56832FC9815444D6C469B38B80545FC2990B8EE593148',
+                },
+                translations: {
+                    backend: {
+                        loadPath: 'https://cdn.jsdelivr.net/npm/@keen.io/dashboard-creator@latest/dist/locales/{{lng}}/{{ns}}.json'
+                    }
+                },
+            }).render();
+        </script>
+    </div>
+
+    <script>
+        document.getElementById('toggle-dashboard').addEventListener('click', function () {
+            const dashboardContainer = document.getElementById('dashboard-container');
+            if (dashboardContainer.style.display === 'none') {
+                dashboardContainer.style.display = 'block'; // Show the dashboard
+            } else {
+                dashboardContainer.style.display = 'none'; // Hide the dashboard
+            }
+        });
+    </script>
+
+    <script>
+        (function (name, path, ctx) { ctx[name] = ctx[name] || { ready: function (fn) { var h = document.getElementsByTagName('head')[0], s = 
+document.createElement('script'), w = window, loaded; s.onload = s.onerror = s.onreadystatechange = function () { if ((s.readyState && 
+!(/^c|loade/.test(s.readyState))) || loaded) { return } s.onload = s.onreadystatechange = null; loaded = 1; ctx[name].ready(fn) }; s.async = 1; s.src 
+= path; h.parentNode.insertBefore(s, h) } } })
+            ('KeenTracking', 'https://cdn.jsdelivr.net/npm/keen-tracking@4/dist/keen-tracking.min.js', this);
+
+        KeenTracking.ready(function () {
+            // Keen client is initialized within the recordEventToKeen function now
+            const client = new KeenTracking({
+                projectId: '66405624ee261c601ba44347',
+                writeKey: 
+'c647b77022a79a842c9024962d6d1f7ecf34ab897d8f4a7a81f2248927b3edf36b1fb855b611b534f721721d1cb06cf96c9355afebec0b082434bbccb0db9116ad0bf0ea1b4d6638b8a45b0b6de540ca87188e547f5d8c86115e43361359ff16'
+            });
+
+            client.initAutoTracking();
+            let cart = [];
+
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function () {
+                    const product = this.dataset.product;
+                    addToCart(product);
+                    recordEventToKeen(product);
+                });
+            });
+
+            function addToCart(item) {
+                cart.push(item);
+                displayCart();
+            }
+
+            function displayCart() {
+                const cartItems = document.getElementById('cart-items');
+                cartItems.innerHTML = ''; // Clear existing items
+                cart.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    cartItems.appendChild(li);
+                });
+            }
+
+
+            function recordEventToKeen(item) {
+
+                // Record event to Keen
+                client.recordEvent('addToCart', {
+                    productAdded: item
+                });
+            }
+        });
+
+
+        // Embedded Visualization Script
+    </script>
+
+</body>
+
+</html>
