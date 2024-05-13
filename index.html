@@ -138,56 +138,90 @@
         });
     </script>
 
-    <script>
-        (function (name, path, ctx) { ctx[name] = ctx[name] || { ready: function (fn) { var h = document.getElementsByTagName('head')[0], s = document.createElement('script'), w = window, loaded; s.onload = s.onerror = s.onreadystatechange = function () { if ((s.readyState && !(/^c|loade/.test(s.readyState))) || loaded) { return } s.onload = s.onreadystatechange = null; loaded = 1; ctx[name].ready(fn) }; s.async = 1; s.src = path; h.parentNode.insertBefore(s, h) } } })
-            ('KeenTracking', 'https://cdn.jsdelivr.net/npm/keen-tracking@4/dist/keen-tracking.min.js', this);
+<script>
+    let cart = [];
 
-        KeenTracking.ready(function () {
-            // Keen client is initialized within the recordEventToKeen function now
-            const client = new KeenTracking({
-                projectId: '66405624ee261c601ba44347',
-                writeKey: 'c647b77022a79a842c9024962d6d1f7ecf34ab897d8f4a7a81f2248927b3edf36b1fb855b611b534f721721d1cb06cf96c9355afebec0b082434bbccb0db9116ad0bf0ea1b4d6638b8a45b0b6de540ca87188e547f5d8c86115e43361359ff16'
-            });
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', function() {
+            const product = this.dataset.product;
+            addToCart(product);
+            recordEventToKeen(product);
+        });
+    });
 
-            client.initAutoTracking();
-            let cart = [];
+    function addToCart(item) {
+        cart.push(item);
+        displayCart();
+    }
 
-            document.querySelectorAll('.add-to-cart').forEach(button => {
-                button.addEventListener('click', function () {
-                    const product = this.dataset.product;
-                    addToCart(product);
-                    recordEventToKeen(product);
-                });
-            });
+    function displayCart() {
+        const cartItems = document.getElementById('cart-items');
+        cartItems.innerHTML = ''; // Clear existing items
+        cart.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item;
+            cartItems.appendChild(li);
+        });
+    }
 
-            function addToCart(item) {
-                cart.push(item);
-                displayCart();
-            }
-
-            function displayCart() {
-                const cartItems = document.getElementById('cart-items');
-                cartItems.innerHTML = ''; // Clear existing items
-                cart.forEach(item => {
-                    const li = document.createElement('li');
-                    li.textContent = item;
-                    cartItems.appendChild(li);
-                });
-            }
-
-
-            function recordEventToKeen(item) {
-
-                // Record event to Keen
-                client.recordEvent('addToCart', {
-                    productAdded: item
-                });
-            }
+    function recordEventToKeen(item) {
+        // Initialize Keen client
+        const client = new KeenTracking({
+            projectId: '66405624ee261c601ba44347',
+            writeKey: 'c647b77022a79a842c9024962d6d1f7ecf34ab897d8f4a7a81f2248927b3edf36b1fb855b611b534f721721d1cb06cf96c9355afebec0b082434bbccb0db9116ad0bf0ea1b4d6638b8a45b0b6de540ca87188e547f5d8c86115e43361359ff16'
         });
 
+        client.initAutoTracking();
 
-        // Embedded Visualization Script
-    </script>
+        // Record event to Keen
+        client.recordEvent('addToCart', {
+            productAdded: item
+        });
+    }
+</script>
+
+<script>
+    (function(name,path,ctx){ctx[name]=ctx[name]||{ready:function(fn){var h=document.getElementsByTagName('head')[0],s=document.createElement('script'),w=window,loaded;s.onload=s.onerror=s.onreadystatechange=function(){if((s.readyState&&!(/^c|loade/.test(s.readyState)))||loaded){return}s.onload=s.onreadystatechange=null;loaded=1;ctx[name].ready(fn)};s.async=1;s.src=path;h.parentNode.insertBefore(s,h)}}})
+    ('KeenTracking', 'https://cdn.jsdelivr.net/npm/keen-tracking@4/dist/keen-tracking.min.js', this);
+
+    KeenTracking.ready(function(){
+        // Keen client is initialized within the recordEventToKeen function now
+    });
+
+    
+// Embedded Visualization Script
+</script>
+    <div id="root"></div>
+    <div id="modal-root"></div>
+    <script type="text/javascript">
+    new KeenPublicDashboard({
+    container: '#root',
+    modalContainer: '#modal-root',
+    dashboardId: 'f5619f61-1804-4a19-bc7b-b504039f780d',
+    defaultTimezoneForQuery: "Etc/UTC",
+    disableTimezoneSelection: false,
+    widgetsConfiguration: {
+        datePicker: {
+        defaultTimezone: 'Etc/UTC',
+        disableTimezoneSelection: false
+        }
+    },
+    backend: {
+        analyticsApiUrl: 'api.keen.io',
+        dashboardsApiUrl: 'https://dashboard-service.k-n.io',
+    },
+    project: {
+        id: '66405624ee261c601ba44347',
+        accessKey: '2E1CFCFD3593DC99E5C56832FC9815444D6C469B38B80545FC2990B8EE593148',
+        masterKey: '2E1CFCFD3593DC99E5C56832FC9815444D6C469B38B80545FC2990B8EE593148',
+    },
+    translations: {
+        backend: {
+        loadPath: 'https://cdn.jsdelivr.net/npm/@keen.io/dashboard-creator@latest/dist/locales/{{lng}}/{{ns}}.json'
+        }
+    },
+    }).render();
+</script>
 
 </body>
 
