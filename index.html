@@ -47,8 +47,8 @@
         }
 
         #dashboard-container {
-            display: none;
-            /* Initially hide the dashboard */
+            align-items: center;
+            
             margin-top: 20px;
             /* Added margin for spacing */
         }
@@ -73,15 +73,13 @@
             <button class="add-to-cart" data-product="Guitar">Add to Cart</button>
         </div>
         <div class="product">
-            <img 
-src="https://images.unsplash.com/photo-1523297554394-dc159677ffe1?q=80&w=2083&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            <img src="https://images.unsplash.com/photo-1523297554394-dc159677ffe1?q=80&w=2083&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Synth">
             <h2>Synth</h2>
             <button class="add-to-cart" data-product="Synth">Add to Cart</button>
         </div>
         <div class="product">
-            <img 
-src="https://images.unsplash.com/photo-1543443258-92b04ad5ec6b?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            <img src="https://images.unsplash.com/photo-1543443258-92b04ad5ec6b?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Drums">
             <h2>Drums</h2>
             <button class="add-to-cart" data-product="Drums">Add to Cart</button>
@@ -141,18 +139,14 @@ src="https://images.unsplash.com/photo-1543443258-92b04ad5ec6b?q=80&w=3540&auto=
     </script>
 
     <script>
-        (function (name, path, ctx) { ctx[name] = ctx[name] || { ready: function (fn) { var h = document.getElementsByTagName('head')[0], s = 
-document.createElement('script'), w = window, loaded; s.onload = s.onerror = s.onreadystatechange = function () { if ((s.readyState && 
-!(/^c|loade/.test(s.readyState))) || loaded) { return } s.onload = s.onreadystatechange = null; loaded = 1; ctx[name].ready(fn) }; s.async = 1; s.src 
-= path; h.parentNode.insertBefore(s, h) } } })
+        (function (name, path, ctx) { ctx[name] = ctx[name] || { ready: function (fn) { var h = document.getElementsByTagName('head')[0], s = document.createElement('script'), w = window, loaded; s.onload = s.onerror = s.onreadystatechange = function () { if ((s.readyState && !(/^c|loade/.test(s.readyState))) || loaded) { return } s.onload = s.onreadystatechange = null; loaded = 1; ctx[name].ready(fn) }; s.async = 1; s.src = path; h.parentNode.insertBefore(s, h) } } })
             ('KeenTracking', 'https://cdn.jsdelivr.net/npm/keen-tracking@4/dist/keen-tracking.min.js', this);
 
         KeenTracking.ready(function () {
             // Keen client is initialized within the recordEventToKeen function now
             const client = new KeenTracking({
                 projectId: '66405624ee261c601ba44347',
-                writeKey: 
-'c647b77022a79a842c9024962d6d1f7ecf34ab897d8f4a7a81f2248927b3edf36b1fb855b611b534f721721d1cb06cf96c9355afebec0b082434bbccb0db9116ad0bf0ea1b4d6638b8a45b0b6de540ca87188e547f5d8c86115e43361359ff16'
+                writeKey: 'c647b77022a79a842c9024962d6d1f7ecf34ab897d8f4a7a81f2248927b3edf36b1fb855b611b534f721721d1cb06cf96c9355afebec0b082434bbccb0db9116ad0bf0ea1b4d6638b8a45b0b6de540ca87188e547f5d8c86115e43361359ff16'
             });
 
             client.initAutoTracking();
